@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769431741848",
+    "project_id": "questing-board",
+    "storage_bucket": "questing-board.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769431741848:android:7d1e02fecc5b6fedd6f7ed",
+        "android_client_info": {
+          "package_name": "com.sleeplessstudios.mappapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769431741848-0e8lm7kvang2k5v49djq5mek5437v5d4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZMOj-ls-c8Rb01nw3A3SWPJ3CH8pAvvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769431741848-0e8lm7kvang2k5v49djq5mek5437v5d4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
