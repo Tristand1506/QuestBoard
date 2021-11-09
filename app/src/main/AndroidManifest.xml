@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
 
+        <activity android:name=".Login" />
+        <activity android:name=".Settings" />
+        <activity android:name=".SignUp" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -24,12 +27,12 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name=".map"
+            android:name=".Map"
             android:label="@string/title_activity_map"></activity>
 
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name = ".landingpage">
+        <activity android:name = ".LandingPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
