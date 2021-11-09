@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MappApp</string>
     <string name="title_activity_map">Map</string>
+
+    <string name="sidebar_open">Open sidebar</string>
+    <string name="sidebar_close">Close sidebar</string>
 </resources>
