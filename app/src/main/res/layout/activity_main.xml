@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/beige"
     tools:context=".MainActivity">
 
     <ImageView
@@ -27,4 +28,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/main_redbar_img"
         app:srcCompat="@drawable/burger_bar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
