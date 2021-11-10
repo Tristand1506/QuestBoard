@@ -89,7 +89,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     {
         drawer.closeDrawer(Gravity.LEFT);
         //drawer.closeDrawer(GravityCompat.END);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 
