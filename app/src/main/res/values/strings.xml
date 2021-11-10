@@ -5,5 +5,7 @@
     <string name="sidebar_open">Open sidebar</string>
     <string name="sidebar_close">Close sidebar</string>
     <string name="title_activity_maps">Map</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
