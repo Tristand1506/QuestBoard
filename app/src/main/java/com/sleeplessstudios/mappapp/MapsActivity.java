@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -31,10 +33,9 @@ import com.karumi.dexter.listener.single.PermissionListener;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
-
     private ImageButton burgerBar;
-
     private DrawerLayout drawer;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     boolean isPermissionGranted;
 
@@ -62,6 +63,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //button listener
         burgerBar = findViewById(R.id.map_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
+
+        //PLACES PULL UP TAB
+        LinearLayout linearLayout = findViewById(R.id.design_bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(linearLayout);
+        //EXPANDED = SHOW, HIDDEN = HIDE
+        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     /**
