@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige">
+    android:background="@color/beige"
+    android:id="@+id/sidebar_main"
+    tools:openDrawer="left">
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
         android:id="@+id/settings_redbar_img"
         android:layout_width="446dp"
         android:layout_height="74dp"
@@ -15,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_redbar" />
 
-    <ImageButton
+        <ImageButton
         android:id="@+id/settings_burger_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,4 +47,118 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.536" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/settings_toggle_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_redbar_img"
+            app:srcCompat="@drawable/option_bg" />
+
+        <ImageButton
+            android:id="@+id/settings_landmarks_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_toggle_img"
+            app:srcCompat="@drawable/option_bg" />
+
+        <ImageView
+            android:id="@+id/settings_toggle_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_toggle_img"
+            app:layout_constraintStart_toStartOf="@+id/settings_toggle_img"
+            app:layout_constraintTop_toBottomOf="@+id/settings_redbar_img"
+            app:srcCompat="@drawable/toggle_unit_icon" />
+
+        <ImageView
+            android:id="@+id/settings_landmark_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_landmarks_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_toggle_img"
+            app:srcCompat="@drawable/landmarks_icon" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_landmarks_btn"
+            app:layout_constraintEnd_toEndOf="@+id/settings_landmarks_btn"
+            app:layout_constraintTop_toBottomOf="@+id/settings_toggle_img"
+            app:srcCompat="@drawable/back" />
+
+        <TextView
+            android:id="@+id/toggle_static_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Map Units"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_toggle_img"
+            app:layout_constraintStart_toEndOf="@+id/settings_toggle_icon"
+            app:layout_constraintTop_toBottomOf="@+id/settings_redbar_img" />
+
+        <Spinner
+            android:id="@+id/settings_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_landmarks_btn"
+            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/settings_landmark_img"
+            app:layout_constraintTop_toBottomOf="@+id/settings_toggle_img" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_toggle_img"
+            app:layout_constraintEnd_toEndOf="@+id/settings_toggle_img"
+            app:layout_constraintStart_toEndOf="@+id/toggle_static_txt"
+            app:layout_constraintTop_toBottomOf="@+id/settings_redbar_img">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/cardview_dark_background"
+                android:text="km"
+                android:padding="8dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/cardview_dark_background"
+                android:text="miles"
+                android:padding="8dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:id="@+id/sidebar_view"
+        app:headerLayout="@layout/sidebar_header"
+        app:menu="@menu/sidebar_menu">
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
