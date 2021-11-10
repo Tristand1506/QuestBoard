@@ -4,5 +4,6 @@
 
     <string name="sidebar_open">Open sidebar</string>
     <string name="sidebar_close">Close sidebar</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

@@ -21,7 +21,7 @@ public class SignUp extends AppCompatActivity {
 
     public void openMapScreen()
     {
-        Intent intent = new Intent(this, Map.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 }
