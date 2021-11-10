@@ -16,12 +16,12 @@ public class Login extends AppCompatActivity {
 
         //button listener
         login = findViewById(R.id.login_btn);
-        login.setOnClickListener(v -> openMainScreen());
+        login.setOnClickListener(v -> openMapScreen());
     }
 
-    public void openMainScreen()
+    public void openMapScreen()
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Map.class);
         startActivity(intent);
     }
 }
