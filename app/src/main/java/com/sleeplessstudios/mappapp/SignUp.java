@@ -15,13 +15,13 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         signUp = findViewById(R.id.signup_btn);
-        signUp.setOnClickListener(v -> openMainScreen());
+        signUp.setOnClickListener(v -> openMapScreen());
 
     }
 
-    public void openMainScreen()
+    public void openMapScreen()
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Map.class);
         startActivity(intent);
     }
 }

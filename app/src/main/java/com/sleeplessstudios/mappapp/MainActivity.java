@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void openFavs()
     {
         drawer.closeDrawer(Gravity.LEFT);
-        //Intent intent = new Intent(this, Favourites.class);
-       //startActivity(intent);
+        Intent intent = new Intent(this, Favourites.class);
+        startActivity(intent);
     }
 
     public void openReviews()

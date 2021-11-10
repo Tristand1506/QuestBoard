@@ -34,18 +34,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/burger_bar" />
 
-    <TextView
-        android:id="@+id/settings_top_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SETTINGS"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/settings_redbar_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.536" />
+        <TextView
+            android:id="@+id/settings_top_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SETTINGS"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_redbar_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.52" />
 
         <ImageView
             android:id="@+id/settings_toggle_img"
@@ -90,7 +90,7 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/settings_landmarks_btn"
             app:layout_constraintEnd_toEndOf="@+id/settings_landmarks_btn"
             app:layout_constraintTop_toBottomOf="@+id/settings_toggle_img"
@@ -112,8 +112,6 @@
             android:id="@+id/settings_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:textColor="@color/cardview_dark_background"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/settings_landmarks_btn"
