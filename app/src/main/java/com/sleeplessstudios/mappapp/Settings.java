@@ -4,17 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
     private ImageButton burgerBar;
+    private Spinner spinner;
 
     private DrawerLayout drawer;
 
@@ -32,6 +40,22 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         //button listener
         burgerBar = findViewById(R.id.settings_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
+
+        //spinner for FILTERING LANDMARKS
+        spinner = findViewById(R.id.settings_spinner);
+        List<String> landmarkTypes = new ArrayList<>();
+        landmarkTypes.add(0, "Select a Landmark type");
+        landmarkTypes.add("Restaurants");
+        landmarkTypes.add("Hotels");
+        landmarkTypes.add("Historical Places");
+        landmarkTypes.add("Parks");
+        landmarkTypes.add("Hospitals");
+        landmarkTypes.add("Gas Stations");
+        landmarkTypes.add("Entertainment");
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.colour_spinner_layout, landmarkTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -108,5 +132,24 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         else {
             super.onBackPressed();
         }
+    }
+
+    //USE THIS FOR WHATEVER THE SPINNER IS SUPPOSED TO DO -FILTER LANDMARKS
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    //https://youtu.be/on_OrrX7Nw4?t=262
+        if (parent.getItemAtPosition(position).equals("Select a Landmark type"))
+        {
+            //do nothing
+        }
+        else
+        {
+            //do the thing
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
