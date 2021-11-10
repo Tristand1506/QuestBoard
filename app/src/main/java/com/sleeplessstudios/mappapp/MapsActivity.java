@@ -43,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView address;
     private TextView placeType;
     private TextView website;
+    private TextView routingInfo;
 
     boolean isPermissionGranted;
 
@@ -76,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         address = findViewById(R.id.bottom_address_txt);
         placeType = findViewById(R.id.bottom_type_txt);
         website = findViewById(R.id.bottom_website_txt);
+        routingInfo = findViewById(R.id.bottom_routing_txt);
 
         //PLACES PULL UP TAB
         LinearLayout linearLayout = findViewById(R.id.design_bottom_sheet);
