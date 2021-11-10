@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,6 +37,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageButton burgerBar;
     private DrawerLayout drawer;
     private BottomSheetBehavior bottomSheetBehavior;
+
+    private TextView placeName;
+    private TextView address;
+    private TextView placeType;
+    private TextView website;
 
     boolean isPermissionGranted;
 
@@ -64,11 +70,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         burgerBar = findViewById(R.id.map_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
 
+        //landmark info textviews
+        placeName = findViewById(R.id.bottom_placename_txt);
+        address = findViewById(R.id.bottom_address_txt);
+        placeType = findViewById(R.id.bottom_type_txt);
+        website = findViewById(R.id.bottom_website_txt);
+
         //PLACES PULL UP TAB
         LinearLayout linearLayout = findViewById(R.id.design_bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(linearLayout);
         //EXPANDED = SHOW, HIDDEN = HIDE
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
