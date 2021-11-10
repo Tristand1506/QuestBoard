@@ -172,7 +172,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent(this, LandingPage.class);
         //LoginManager.getInstance().LogOut();
         startActivity(intent);
-
     }
 
     @Override
