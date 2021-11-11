@@ -36,6 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name of Place"
+                android:ellipsize="end"
+                android:lines="1"
+                android:scrollHorizontally="true"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="26dp"
@@ -69,16 +72,6 @@
                 android:text="Distance: 0km     Travel Time: 00h00m"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_dark_background" />
-
-            <TextView
-                android:id="@+id/bottom_website_txt"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="www.randomwebsite.com"
-                android:textAlignment="center"
-                android:textColor="@color/dark_blue" />
 
         </LinearLayout>
 
