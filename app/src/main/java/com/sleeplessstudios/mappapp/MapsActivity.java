@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -62,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView placeName;
     private TextView address;
     private TextView placeType;
-    private TextView website;
     private TextView routingInfo;
 
     boolean isPermissionGranted;
@@ -99,7 +97,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         placeName = findViewById(R.id.bottom_placename_txt);
         address = findViewById(R.id.bottom_address_txt);
         placeType = findViewById(R.id.bottom_type_txt);
-        website = findViewById(R.id.bottom_website_txt);
         routingInfo = findViewById(R.id.bottom_routing_txt);
 
         //PLACES PULL UP TAB
@@ -193,7 +190,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onTaskDone(Object... values) {
-        Toast.makeText(MapsActivity.this, "TASK COMPLETE", Toast.LENGTH_SHORT).show();
         if (currentPolyline != null) {
             currentPolyline.remove();
         }
