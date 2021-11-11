@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
@@ -29,7 +28,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         NavigationView navView = findViewById(R.id.sidebar_view);
         navView.setNavigationItemSelectedListener(this);
 
-        burgerBar = (ImageButton) findViewById(R.id.favourites_burger_btn);
+        burgerBar = (ImageButton) findViewById(R.id.reviews_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
     }
 
@@ -77,8 +76,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     public void openReviews()
     {
         drawer.closeDrawer(Gravity.LEFT);
-        //Intent intent = new Intent(this, Reviews.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Reviews.class);
+        startActivity(intent);
     }
 
     public void openSettings()

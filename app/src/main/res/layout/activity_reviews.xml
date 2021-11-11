@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="FAVOURITES"
+            android:text="REVIEWS"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/reviews_redbar_img"

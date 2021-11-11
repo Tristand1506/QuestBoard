@@ -134,6 +134,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 SearchPoi(poi);
 
+                float routeDistance = distBetween(originLatLng.latitude, originLatLng.longitude, poiLatLng.latitude, poiLatLng.longitude);
+                int routeDuration = (Math.round((routeDistance/80) * 60));
+
+                routingInfo.setText("Distance: " + routeDistance + " km,      Duration: " + routeDuration + " min");
             }
         });
     }
@@ -171,6 +175,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    public static float distBetween(double lat1, double lng1, double lat2, double lng2) {
+        double earthRadius = 6371;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLng / 2)
+                * Math.sin(dLng / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double dist = earthRadius * c;
+
+        float roundedDist = (float) (Math.round(dist * 100.0) / 100.0);
+
+        return roundedDist;
+    }
+
     private String getUrl(LatLng origin, LatLng destination, String directionMode) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
@@ -194,6 +214,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             currentPolyline.remove();
         }
         currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+
 
     }
 
@@ -288,8 +309,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void openReviews()
     {
         drawer.closeDrawer(Gravity.LEFT);
-        //Intent intent = new Intent(this, Reviews.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Reviews.class);
+        startActivity(intent);
     }
 
     public void openSettings()
