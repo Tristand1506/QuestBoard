@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import com.google.android.material.navigation.NavigationView;
@@ -23,6 +24,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
     private ImageButton burgerBar;
     private Spinner spinner;
+    private RadioButton km;
+    private RadioButton miles;
 
     private DrawerLayout drawer;
 
@@ -41,6 +44,12 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         burgerBar = findViewById(R.id.settings_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
 
+        km = findViewById(R.id.settings_km_btn);
+        km.setOnClickListener(v -> toggleKm());
+
+        miles = findViewById(R.id.settings_miles_btn);
+        miles.setOnClickListener(v -> toggleMiles());
+
         //spinner for FILTERING LANDMARKS
         spinner = findViewById(R.id.settings_spinner);
         List<String> landmarkTypes = new ArrayList<>();
@@ -56,6 +65,16 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+    }
+
+    public void toggleKm()
+    {
+
+    }
+
+    public void toggleMiles()
+    {
+
     }
 
     @Override
