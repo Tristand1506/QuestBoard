@@ -26,12 +26,17 @@ public class UserAccount {
     ////////////////
 
     //default constructor
-    public UserAccount(){}
+    public UserAccount(){
+        setUnits(UnitType.METRIC);
+        setPrefLandmark(LocationType.EMPTY);
+    }
 
     //partial constructor
     public UserAccount(String username, String email) {
         setEmail(email);
         setUsername(username);
+        setUnits(UnitType.METRIC);
+        setPrefLandmark(LocationType.EMPTY);
     }
 
     //full constructor

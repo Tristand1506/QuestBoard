@@ -21,6 +21,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import ObjectLib.Location;
+import ObjectLib.UserAccount;
+import UtilLib.AccountManager;
+import UtilLib.UnitType;
+
 public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
     private ImageButton burgerBar;
     private Spinner spinner;
@@ -50,6 +55,15 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         miles = findViewById(R.id.settings_miles_btn);
         miles.setOnClickListener(v -> toggleMiles());
 
+        switch (AccountManager.getActiveAccountData().getUnits()){
+            case METRIC:
+                km.setChecked(true);
+                break;
+            case IMPERIAL:
+                miles.setChecked(true);
+                break;
+        }
+
         //spinner for FILTERING LANDMARKS
         spinner = findViewById(R.id.settings_spinner);
         List<String> landmarkTypes = new ArrayList<>();
@@ -65,16 +79,25 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        spinner.setSelection(Location.toInteger(AccountManager.getActiveAccountData().getPrefLandmark()));
     }
 
     public void toggleKm()
     {
-
+        if (km.isChecked()){
+            UserAccount acc = AccountManager.getActiveAccountData();
+            acc.setUnits(UnitType.METRIC);
+            AccountManager.UpdateAccountData(acc);
+        }
     }
 
     public void toggleMiles()
     {
-
+        if (miles.isChecked()){
+            UserAccount acc = AccountManager.getActiveAccountData();
+            acc.setUnits(UnitType.IMPERIAL);
+            AccountManager.UpdateAccountData(acc);
+        }
     }
 
     @Override

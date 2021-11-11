@@ -23,7 +23,11 @@ public class AccountManager {
     public static AccountManager I() {return Manage;}
     private static DatabaseReference activeUserData;
 
-    public static UserAccount activeAccountData;
+    private static UserAccount activeAccountData;
+
+    public static UserAccount getActiveAccountData() {
+        return activeAccountData;
+    }
 
     // ensures active account is bound to the last user whop logged in
     FirebaseAuth.AuthStateListener userBind = new FirebaseAuth.AuthStateListener() {
@@ -70,15 +74,13 @@ public class AccountManager {
     }
 
 
-    public void UpdateUserData(UserAccount acc){
+    public static void UpdateAccountData(UserAccount acc){
         System.out.println("Finding User: "+getActiveUser().getUid() );
         activeUserData.child("email").setValue(acc.getEmail());
         activeUserData.child("username").setValue(acc.getUsername());
-        activeUserData.child("pref_landmark").setValue(acc.getPrefLandmark());
         activeUserData.child("pref_units").setValue(acc.getUnits());
+        activeUserData.child("pref_landmark").setValue(acc.getPrefLandmark());
 
     }
-    public void initUsers(){
-        //activeUserData = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child();
-    }
+
 }
