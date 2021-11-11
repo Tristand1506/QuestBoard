@@ -30,7 +30,7 @@ public class AccountManager {
     }
 
     // ensures active account is bound to the last user whop logged in
-    FirebaseAuth.AuthStateListener userBind = new FirebaseAuth.AuthStateListener() {
+    static FirebaseAuth.AuthStateListener userBind = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             activeUserData = FirebaseDatabase.getInstance("https://questing-board-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child( getActiveUser().getUid());
@@ -73,6 +73,9 @@ public class AccountManager {
         }
     }
 
+    public static void initBindUser(){
+        FirebaseAuth.getInstance().addAuthStateListener(userBind);
+    }
 
     public static void UpdateAccountData(UserAccount acc){
         System.out.println("Finding User: "+getActiveUser().getUid() );
