@@ -1,13 +1,7 @@
 
 package UtilLib;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
-import android.util.Base64;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,18 +9,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.ByteArrayOutputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import ObjectLib.Location;
-
-import static android.util.Base64.URL_SAFE;
 
 public class DatabaseManager {
 
@@ -45,7 +31,7 @@ public class DatabaseManager {
 
     private String TAG = "DataManger";
 
-    private DatabaseReference locationDB = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(LoginManager.getActiveUser().getUid()).child("Collections");
+    private DatabaseReference locationDB = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(AccountManager.getActiveUser().getUid()).child("Collections");
  //private StorageReference storageRef = FirebaseStorage.getInstance().getReference("Collection Images");
 
     List<Location> locations = new ArrayList<Location>();

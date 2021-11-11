@@ -3,7 +3,6 @@ package com.sleeplessstudios.mappapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -17,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import ObjectLib.UserAccount;
-import UtilLib.LoginManager;
+import UtilLib.AccountManager;
 
 public class SignUp extends AppCompatActivity {
     private ImageButton signUp;
@@ -60,7 +59,7 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 //create new userData
                                 Toast.makeText(SignUp.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                                LoginManager.addUser(in);
+                                AccountManager.addUser(in);
                                 openMapScreen();
                             } else {
                                 // If sign in fails, display a message to the user.

@@ -1,7 +1,8 @@
 package UtilLib;
 
-import android.nfc.Tag;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -12,74 +13,66 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 import ObjectLib.UserAccount;
 
-public class LoginManager {
+public class AccountManager {
 
     private static String TAG = "LoginManager";
 
     // Singleton LoginManager
-    private static final LoginManager Manage = new LoginManager();
-    public static LoginManager I() {return Manage;}
-    private DatabaseReference activeUserData;
+    private static final AccountManager Manage = new AccountManager();
+    public static AccountManager I() {return Manage;}
+    private static DatabaseReference activeUserData;
 
-    static private FirebaseAuth mAuth;
+    public static UserAccount activeAccountData;
 
-    public LoginManager(){
+    // ensures active account is bound to the last user whop logged in
+    FirebaseAuth.AuthStateListener userbind = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            activeUserData = FirebaseDatabase.getInstance("https://questing-board-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child( getActiveUser().getUid());
+            activeUserData.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    System.out.println("Refreshing Account Info...");
 
-//        activeUserData.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                accounts.clear();
-//                System.out.println("Refreshing Accounts...");
-//                for (DataSnapshot snap: dataSnapshot.getChildren())
-//                {
-//                    UserAccount acc = snap.getValue(UserAccount.class);
-//                    accounts.add(acc);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
-    }
+                    UserAccount acc = dataSnapshot.getValue(UserAccount.class);
+                    activeAccountData = acc;
+                }
 
-    private List<UserAccount> accounts = new ArrayList<>();
-
-    public UserAccount getAccountFromEmail(String email){
-        for (UserAccount acc: accounts) {
-            if (acc.getEmail().equalsIgnoreCase(email)){
-                return acc;
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
         }
-        return  null;
-    }
-    public UserAccount getAccountFromUsername(String username){
-        for (UserAccount acc: accounts) {
-            if (acc.getUsername().equals(username)){
-                return acc;
-            }
-        }
-        return  null;
+    };
+
+
+
+
+    public AccountManager(){
+        FirebaseAuth.getInstance().addAuthStateListener(userbind);
     }
 
     public static FirebaseUser getActiveUser(){
         Log.e("LoginManager", FirebaseAuth.getInstance().getCurrentUser().getUid());
         return FirebaseAuth.getInstance().getCurrentUser();
     }
-    public static void addUser(UserAccount acc){
 
+    // adds userData to database
+    public static void addUser(UserAccount acc){
         try{
             FirebaseDatabase.getInstance("https://questing-board-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child( getActiveUser().getUid()).setValue(acc);
         } catch(Exception e){
             Log.e(TAG, "addUser: failed to add \n" + e);
         }
     }
+
 
     public void UpdateUserData(UserAccount acc){
         System.out.println("Finding User: "+getActiveUser().getUid() );
