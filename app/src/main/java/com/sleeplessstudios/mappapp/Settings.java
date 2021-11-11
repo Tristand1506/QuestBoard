@@ -24,6 +24,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import ObjectLib.Location;
 import ObjectLib.UserAccount;
 import UtilLib.AccountManager;
+import UtilLib.LocationType;
 import UtilLib.UnitType;
 
 public class Settings extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
@@ -180,14 +181,42 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     //https://youtu.be/on_OrrX7Nw4?t=262
-        if (parent.getItemAtPosition(position).equals("All Landmarks"))
-        {
-            //show all
+
+        /*
+
+        landmarkTypes.add("Hospitals");
+        landmarkTypes.add("Gas Stations");
+        landmarkTypes.add("Entertainment");
+         */
+        UserAccount acc = AccountManager.getActiveAccountData();
+
+        switch (parent.getItemAtPosition(position).toString()){
+            case "All Landmarks":
+                acc.setPrefLandmark(LocationType.EMPTY);
+                break;
+            case "Restaurants":
+                acc.setPrefLandmark(LocationType.RESTAURANT);
+                break;
+            case "Hotels":
+                acc.setPrefLandmark(LocationType.HOTEL);
+                break;
+            case "Historical Places":
+                acc.setPrefLandmark(LocationType.HISTORIC);
+                break;
+            case "Parks":
+                acc.setPrefLandmark(LocationType.PARK);
+                break;
+            case "Hospitals":
+                acc.setPrefLandmark(LocationType.MEDICAL);
+                break;
+            case "Gas Stations":
+                acc.setPrefLandmark(LocationType.GAS);
+                break;
+            case "Entertainment":
+                acc.setPrefLandmark(LocationType.RECREATION);
+                break;
         }
-        else if(parent.getItemAtPosition(position).equals("Restaurants"))
-        {
-            //show this landmark only
-        }
+        AccountManager.UpdateAccountData(acc);
     }
 
     @Override
