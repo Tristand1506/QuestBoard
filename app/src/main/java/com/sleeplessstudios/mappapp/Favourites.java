@@ -77,8 +77,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     public void openReviews()
     {
         drawer.closeDrawer(Gravity.LEFT);
-        //Intent intent = new Intent(this, Reviews.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Reviews.class);
+        startActivity(intent);
     }
 
     public void openSettings()
