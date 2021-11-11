@@ -4,8 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -13,8 +11,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 import ObjectLib.UserAccount;
 
@@ -30,7 +26,7 @@ public class AccountManager {
     public static UserAccount activeAccountData;
 
     // ensures active account is bound to the last user whop logged in
-    FirebaseAuth.AuthStateListener userbind = new FirebaseAuth.AuthStateListener() {
+    FirebaseAuth.AuthStateListener userBind = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             activeUserData = FirebaseDatabase.getInstance("https://questing-board-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child( getActiveUser().getUid());
@@ -56,7 +52,7 @@ public class AccountManager {
 
 
     public AccountManager(){
-        FirebaseAuth.getInstance().addAuthStateListener(userbind);
+        FirebaseAuth.getInstance().addAuthStateListener(userBind);
     }
 
     public static FirebaseUser getActiveUser(){
@@ -76,10 +72,11 @@ public class AccountManager {
 
     public void UpdateUserData(UserAccount acc){
         System.out.println("Finding User: "+getActiveUser().getUid() );
-        activeUserData.child(getActiveUser().getUid()).child("email").setValue(acc.getEmail());
-        activeUserData.child(getActiveUser().getUid()).child("username").setValue(acc.getUsername());
-        //activeUserData.child(getActiveUser().getUid()).child("gender").setValue(acc.getGender());
-        //activeUserData.child(getActiveUser().getUid()).child("phone").setValue(acc.getPhone());
+        activeUserData.child("email").setValue(acc.getEmail());
+        activeUserData.child("username").setValue(acc.getUsername());
+        activeUserData.child("pref_landmark").setValue(acc.getPrefLandmark());
+        activeUserData.child("pref_units").setValue(acc.getUnits());
+
     }
     public void initUsers(){
         //activeUserData = FirebaseDatabase.getInstance("https://modernpocket-f5780-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child();

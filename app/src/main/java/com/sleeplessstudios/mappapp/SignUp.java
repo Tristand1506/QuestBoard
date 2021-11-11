@@ -58,6 +58,7 @@ public class SignUp extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 //create new userData
+                                in.setId(AccountManager.getActiveUser().getUid());
                                 Toast.makeText(SignUp.this, "Registration Successful", Toast.LENGTH_LONG).show();
                                 AccountManager.addUser(in);
                                 openMapScreen();

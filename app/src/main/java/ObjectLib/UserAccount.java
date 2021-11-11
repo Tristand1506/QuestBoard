@@ -7,17 +7,17 @@ import UtilLib.UnitType;
 
 public class UserAccount {
 
-    String TAG = "User_Account";
+    private String TAG = "User_Account";
 
 
-    String id;
+    private String id;
 
-    String email;
-    String username;
+    private String email;
+    private String username;
 
-    UnitType units;
-    List<Location> favorites;
-    LocationType prefLandmark;
+    private UnitType units;
+    private List<Location> favorites;
+    private LocationType prefLandmark;
 
 
 
@@ -68,6 +68,29 @@ public class UserAccount {
         return email;
     }
 
+    public UnitType getUnits() {
+        return units;
+    }
+
+    public void setUnits(UnitType units) {
+        this.units = units;
+    }
+
+    public List<Location> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Location> favorites) {
+        this.favorites = favorites;
+    }
+
+    public LocationType getPrefLandmark() {
+        return prefLandmark;
+    }
+
+    public void setPrefLandmark(LocationType prefLandmark) {
+        this.prefLandmark = prefLandmark;
+    }
 
     @Override
     public String toString() {
