@@ -53,7 +53,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         //spinner for FILTERING LANDMARKS
         spinner = findViewById(R.id.settings_spinner);
         List<String> landmarkTypes = new ArrayList<>();
-        landmarkTypes.add(0, "Select a Landmark type");
+        landmarkTypes.add(0, "All Landmarks");
         landmarkTypes.add("Restaurants");
         landmarkTypes.add("Hotels");
         landmarkTypes.add("Historical Places");
@@ -157,13 +157,13 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     //https://youtu.be/on_OrrX7Nw4?t=262
-        if (parent.getItemAtPosition(position).equals("Select a Landmark type"))
+        if (parent.getItemAtPosition(position).equals("All Landmarks"))
         {
-            //do nothing
+            //show all
         }
-        else
+        else if(parent.getItemAtPosition(position).equals("Restaurants"))
         {
-            //do the thing
+            //show this landmark only
         }
     }
 
