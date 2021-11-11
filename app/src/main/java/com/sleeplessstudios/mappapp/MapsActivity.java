@@ -47,6 +47,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.Arrays;
 import java.util.List;
 
+import UtilLib.AccountManager;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback, NavigationView.OnNavigationItemSelectedListener  {
 
     private GoogleMap mMap;
@@ -117,6 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+
         mMap.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
             public void onPoiClick(PointOfInterest poi) {
@@ -134,10 +137,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 SearchPoi(poi);
 
-                float routeDistance = distBetween(originLatLng.latitude, originLatLng.longitude, poiLatLng.latitude, poiLatLng.longitude);
-                int routeDuration = (Math.round((routeDistance/80) * 60));
+                switch (AccountManager.getActiveAccountData().getPrefUnits()) {
+                    case METRIC:
+                        float routeMetDistance = distBetween(originLatLng.latitude, originLatLng.longitude, poiLatLng.latitude, poiLatLng.longitude);
+                        int routeMetDuration = (Math.round((routeMetDistance/80) * 60));
 
-                routingInfo.setText("Distance: " + routeDistance + " km,      Duration: " + routeDuration + " min");
+                        routingInfo.setText("Distance: " + routeMetDistance + " km,      Duration: " + routeMetDuration + " min");
+
+                        break;
+                    case IMPERIAL:
+                        float routeImpDistance = distBetween(originLatLng.latitude, originLatLng.longitude, poiLatLng.latitude, poiLatLng.longitude);
+
+                        routeImpDistance *= 0.6f;
+
+                        routeImpDistance = (float) (Math.round(routeImpDistance * 100.0) / 100.0);
+
+                        int routeImpDuration = (Math.round((routeImpDistance/50) * 60));
+
+                        routingInfo.setText("Distance: " + routeImpDistance + " miles,      Duration: " + routeImpDuration + " min");
+
+                        break;
+                    default:
+                        break;
+                }
+
+
             }
         });
     }
