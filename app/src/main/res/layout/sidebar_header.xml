@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="70dp"
     android:background="@color/red"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/sidebar_userimage_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        app:srcCompat="@drawable/avatar_icon" />
-
     <TextView
         android:id="@+id/sidebar_username_txt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:layout_height="match_parent"
+        android:paddingTop="5dp"
         android:text="username"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
 </LinearLayout>

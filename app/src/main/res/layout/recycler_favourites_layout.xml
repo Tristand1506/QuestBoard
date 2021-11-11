@@ -33,6 +33,21 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/fav_placename_btn"
+        android:layout_width="310dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="110dp"
+        android:background="@color/light_beige"
+        android:ellipsize="end"
+        android:letterSpacing="0.1"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:text="Favourite Place Name"
+        android:paddingRight="10dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="20sp"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/favourite_name"
@@ -41,7 +56,10 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_toRightOf="@id/img_relative_layout"
+        android:ellipsize="end"
         android:letterSpacing="0.1"
+        android:lines="1"
+        android:scrollHorizontally="true"
         android:text="Favourite Place Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/cardview_dark_background"

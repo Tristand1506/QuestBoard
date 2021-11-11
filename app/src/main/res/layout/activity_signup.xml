@@ -148,6 +148,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="@+id/signup_rectangle2"
         app:layout_constraintEnd_toEndOf="@+id/signup_rectangle2"
         app:layout_constraintHorizontal_bias="0.451"

@@ -12,4 +12,6 @@
     <color name="beige">#E1C9A8</color>
     <color name="red">#AD5152</color>
     <color name="light_beige">#E8D5BB</color>
+    <color name="blue_link">#4169e1</color>
+    <color name="dark_blue">#00008b</color>
 </resources>
