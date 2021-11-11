@@ -33,22 +33,24 @@ public class AccountManager {
     FirebaseAuth.AuthStateListener userBind = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            activeUserData = FirebaseDatabase.getInstance("https://questing-board-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child( getActiveUser().getUid());
-            activeUserData.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println("Refreshing Account Info...");
+            if (getActiveUser()!=null) {
+                activeUserData = FirebaseDatabase.getInstance("https://questing-board-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(getActiveUser().getUid());
+                activeUserData.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        System.out.println("Refreshing Account Info...");
 
-                    UserAccount acc = dataSnapshot.getValue(UserAccount.class);
-                    activeAccountData = acc;
-                }
+                        UserAccount acc = dataSnapshot.getValue(UserAccount.class);
+                        activeAccountData = acc;
+                    }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w(TAG, "Failed to read value.", error.toException());
-                }
-            });
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
+            }
         }
     };
 
@@ -60,7 +62,7 @@ public class AccountManager {
     }
 
     public static FirebaseUser getActiveUser(){
-        Log.e("LoginManager", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        //Log.e("LoginManager");
         return FirebaseAuth.getInstance().getCurrentUser();
     }
 
