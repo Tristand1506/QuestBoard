@@ -56,8 +56,8 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         miles = findViewById(R.id.settings_miles_btn);
         miles.setOnClickListener(v -> toggleMiles());
 
-        if (AccountManager.getActiveAccountData().getUnits()!=null) {
-            switch (AccountManager.getActiveAccountData().getUnits()) {
+        if (AccountManager.getActiveAccountData().getPrefUnits()!=null) {
+            switch (AccountManager.getActiveAccountData().getPrefUnits()) {
                 case METRIC:
                     km.setChecked(true);
                     break;
@@ -89,7 +89,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     {
         if (km.isChecked()){
             UserAccount acc = AccountManager.getActiveAccountData();
-            acc.setUnits(UnitType.METRIC);
+            acc.setPrefUnits(UnitType.METRIC);
             AccountManager.UpdateAccountData(acc);
         }
     }
@@ -98,7 +98,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     {
         if (miles.isChecked()){
             UserAccount acc = AccountManager.getActiveAccountData();
-            acc.setUnits(UnitType.IMPERIAL);
+            acc.setPrefUnits(UnitType.IMPERIAL);
             AccountManager.UpdateAccountData(acc);
         }
     }

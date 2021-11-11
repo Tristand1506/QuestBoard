@@ -15,7 +15,7 @@ public class UserAccount {
     private String email;
     private String username;
 
-    private UnitType units;
+    private UnitType prefUnits;
     private List<Location> favorites;
     private LocationType prefLandmark;
 
@@ -27,7 +27,7 @@ public class UserAccount {
 
     //default constructor
     public UserAccount(){
-        setUnits(UnitType.METRIC);
+        setPrefUnits(UnitType.METRIC);
         setPrefLandmark(LocationType.EMPTY);
     }
 
@@ -35,7 +35,7 @@ public class UserAccount {
     public UserAccount(String username, String email) {
         setEmail(email);
         setUsername(username);
-        setUnits(UnitType.METRIC);
+        setPrefUnits(UnitType.METRIC);
         setPrefLandmark(LocationType.EMPTY);
     }
 
@@ -44,7 +44,7 @@ public class UserAccount {
         setEmail(email);
         setUsername(username);
 
-        units = unit;
+        prefUnits = unit;
         prefLandmark = pref;
         favorites = favs;
     }
@@ -73,12 +73,12 @@ public class UserAccount {
         return email;
     }
 
-    public UnitType getUnits() {
-        return units;
+    public UnitType getPrefUnits() {
+        return prefUnits;
     }
 
-    public void setUnits(UnitType units) {
-        this.units = units;
+    public void setPrefUnits(UnitType prefUnits) {
+        this.prefUnits = prefUnits;
     }
 
     public List<Location> getFavorites() {

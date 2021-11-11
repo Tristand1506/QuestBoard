@@ -78,7 +78,7 @@ public class AccountManager {
         System.out.println("Finding User: "+getActiveUser().getUid() );
         activeUserData.child("email").setValue(acc.getEmail());
         activeUserData.child("username").setValue(acc.getUsername());
-        activeUserData.child("prefUnits").setValue(acc.getUnits());
+        activeUserData.child("prefUnits").setValue(acc.getPrefUnits());
         activeUserData.child("prefLandmark").setValue(acc.getPrefLandmark());
 
     }
