@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
 
+import UtilLib.AccountManager;
+
 public class Reviews extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton burgerBar;
     private DrawerLayout drawer;
@@ -90,7 +92,7 @@ public class Reviews extends AppCompatActivity implements NavigationView.OnNavig
     public void Logout()
     {
         Intent intent = new Intent(this, LandingPage.class);
-        //LoginManager.getInstance().LogOut();
+        AccountManager.I().LogOut();
         startActivity(intent);
 
     }

@@ -162,7 +162,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     public void Logout()
     {
         Intent intent = new Intent(this, LandingPage.class);
-        //LoginManager.getInstance().LogOut();
+        AccountManager.I().LogOut();
         startActivity(intent);
 
     }

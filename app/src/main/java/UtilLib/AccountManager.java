@@ -86,4 +86,9 @@ public class AccountManager {
 
     }
 
+    public void LogOut(){
+        FirebaseAuth.getInstance().signOut();
+        activeAccountData = null;
+    }
+
 }
