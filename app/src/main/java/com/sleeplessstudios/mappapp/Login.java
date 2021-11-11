@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import UtilLib.AccountManager;
+
 public class Login extends AppCompatActivity {
 
     String TAG ="Activity_Login";
@@ -61,6 +63,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void LogInAccount(String email, String password){
+        AccountManager.I().initBindUser();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
