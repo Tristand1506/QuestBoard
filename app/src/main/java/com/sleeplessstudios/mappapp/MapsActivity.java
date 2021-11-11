@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ImageButton;
@@ -31,6 +32,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import com.karumi.dexter.Dexter;
@@ -39,6 +44,9 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback, NavigationView.OnNavigationItemSelectedListener  {
 
@@ -101,6 +109,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         //bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        Places.initialize(getApplicationContext(),  getString(R.string.google_maps_key));
+
     }
 
     @SuppressLint("MissingPermission")
@@ -108,7 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-
 
         mMap.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
@@ -123,9 +133,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 placeName.setText(poiName);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-
                 new FetchURL(MapsActivity.this).execute(getUrl(originLatLng, poiLatLng, "driving"), "driving");
+
+                SearchPoi(poi);
+
             }
+        });
+    }
+
+    private void SearchPoi(PointOfInterest poi) {
+
+        final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.TYPES);
+
+        final FetchPlaceRequest req = FetchPlaceRequest.newInstance(poi.placeId, placeFields);
+        PlacesClient placesClient = Places.createClient(this);
+        placesClient.fetchPlace(req).addOnSuccessListener(fetchPlaceResponse -> {
+
+            Place place = fetchPlaceResponse.getPlace();
+            Log.d("Result", place.getName());
+            if (place.getName() != null)
+            {
+                placeName.setText(place.getName());
+
+
+            } else placeName.setText("Unnamed");
+            if (place.getAddress() != null)
+            {
+                address.setText(place.getAddress());
+            }
+            else address.setText("");
+
+
+            if (place.getTypes().size() >= 1)
+            {
+                String tag = place.getTypes().get(0).name().toLowerCase();
+                tag = tag.replaceAll("_", " ");
+                placeType.setText(tag);
+            }
+            else placeType.setText("");
         });
     }
 

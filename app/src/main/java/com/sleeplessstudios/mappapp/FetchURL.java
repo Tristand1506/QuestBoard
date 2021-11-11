@@ -21,6 +21,7 @@ public class FetchURL extends AsyncTask<String, Void, String> {
 
     public FetchURL(Context mContext) {
         this.mContext = mContext;
+
     }
 
     @Override
@@ -28,6 +29,7 @@ public class FetchURL extends AsyncTask<String, Void, String> {
         // For storing data from web service
         String data = "";
         directionMode = strings[1];
+
         try {
             // Fetching the data from web service
             data = downloadUrl(strings[0]);
