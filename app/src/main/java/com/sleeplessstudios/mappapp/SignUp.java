@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import ObjectLib.UserAccount;
+import UtilLib.LoginManager;
+
 public class SignUp extends AppCompatActivity {
     private ImageButton signUp;
     private EditText username;
@@ -36,19 +39,20 @@ public class SignUp extends AppCompatActivity {
 
         //button listeners
         signUp = findViewById(R.id.signup_btn);
-        signUp.setOnClickListener(v -> SignUpAccount(email.getText().toString(), password.getText().toString()));
+        signUp.setOnClickListener(v -> SignUpAccount(email.getText().toString(), password.getText().toString(), username.getText().toString()));
 
         username = findViewById(R.id.signup_username_txt);
         email = findViewById(R.id.signup_email_txt);
         password = findViewById(R.id.signup_password_txt);
     }
 
-    private void SignUpAccount(String email , String password ){
-        if (email.isEmpty()||password.isEmpty()){
-            Toast.makeText(SignUp.this, "Please enter a email and password",
+    private void SignUpAccount(String email , String password, String username){
+        if (email.isEmpty()||password.isEmpty()||username.isEmpty()){
+            Toast.makeText(SignUp.this, "Please enter a email, username and password",
                     Toast.LENGTH_SHORT).show();
         }
         else{
+            UserAccount in = new UserAccount(username,email);
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -56,6 +60,7 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 //create new userData
                                 Toast.makeText(SignUp.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                                LoginManager.addUser(in);
                                 openMapScreen();
                             } else {
                                 // If sign in fails, display a message to the user.

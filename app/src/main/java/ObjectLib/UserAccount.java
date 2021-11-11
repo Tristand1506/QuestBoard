@@ -7,6 +7,11 @@ import UtilLib.UnitType;
 
 public class UserAccount {
 
+    String TAG = "User_Account";
+
+
+    String id;
+
     String email;
     String username;
 
@@ -37,6 +42,16 @@ public class UserAccount {
         units = unit;
         prefLandmark = pref;
         favorites = favs;
+    }
+
+    public void setId(String id) {
+        if (this.id == null){
+            this.id = id;
+        }
+        System.out.println(TAG+": Failed to set new ID \n ID already assigned");
+    }
+    public String getId() {
+        return id;
     }
 
     public void setUsername(String username) {

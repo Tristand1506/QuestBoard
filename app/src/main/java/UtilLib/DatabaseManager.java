@@ -1,4 +1,4 @@
-/*
+
 package UtilLib;
 
 import android.graphics.Bitmap;
@@ -34,10 +34,13 @@ public class DatabaseManager {
     private static final DatabaseManager Data = new DatabaseManager();
     public static DatabaseManager getInstance() {return Data;}
 
-    public static final String NAME = "name";
-    public static final String COMPLEATION = "comp";
-    public static final String OWNED = "own";
-    public static final String LENT = "lent";
+    //DATABASE HEADERS
+
+    // ACCOUNTS
+    public static final String EMAIL = "email";
+    public static final String USERNAME = "username";
+    public static final String UNIT = "unitpref";
+    public static final String LANDMARK = "landmarkpref";
     public static final String RETURN = "return";
 
     private String TAG = "DataManger";
@@ -96,7 +99,7 @@ public class DatabaseManager {
     }
 
 
-
+    /*
     public void setActiveCollection(ItemCollection ac){
 
         if (ac != null){
@@ -118,13 +121,13 @@ public class DatabaseManager {
             getActiveCollection().setCollectibles(in);
         }
         else activeCollection = null;
-        */
-/*if (activeCollection!=null) {
+
+if (activeCollection!=null) {
             System.out.println("Checking active collection for items");
             for (Collectible item : activeCollection.getCollectibles()) {
                 //System.out.println(item.toString());
             }
-        }*//*
+        }
 
     }
     public void setActiveCollectionFromId(String ac){
@@ -147,13 +150,13 @@ public class DatabaseManager {
             getActiveCollection().setCollectibles(in);
         }
         else activeCollection = null;
-        */
-/*if (activeCollection!=null) {
+
+if (activeCollection!=null) {
             System.out.println("Checking active collection for items");
             for (Collectible item : activeCollection.getCollectibles()) {
                 //System.out.println(item.toString());
             }
-        }*//*
+        }
 
     }
     public void setActiveItem(Collectible inItem){
@@ -187,13 +190,13 @@ public class DatabaseManager {
             getActiveTask().setObjectives(in);
         }
         else activeTask = null;
-        */
-/*if (activeCollection!=null) {
+
+if (activeCollection!=null) {
             System.out.println("Checking active collection for items");
             for (Collectible item : activeCollection.getCollectibles()) {
                 //System.out.println(item.toString());
             }
-        }*//*
+        }
 
     }
     public void setActiveObjective(Objective inObjective){
@@ -595,5 +598,6 @@ public class DatabaseManager {
             }
         });
     }
+    */
 }
-*/
+
