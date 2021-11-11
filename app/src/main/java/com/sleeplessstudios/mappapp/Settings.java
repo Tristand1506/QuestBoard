@@ -56,13 +56,15 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         miles = findViewById(R.id.settings_miles_btn);
         miles.setOnClickListener(v -> toggleMiles());
 
-        switch (AccountManager.getActiveAccountData().getUnits()){
-            case METRIC:
-                km.setChecked(true);
-                break;
-            case IMPERIAL:
-                miles.setChecked(true);
-                break;
+        if (AccountManager.getActiveAccountData().getUnits()!=null) {
+            switch (AccountManager.getActiveAccountData().getUnits()) {
+                case METRIC:
+                    km.setChecked(true);
+                    break;
+                case IMPERIAL:
+                    miles.setChecked(true);
+                    break;
+            }
         }
 
         //spinner for FILTERING LANDMARKS
