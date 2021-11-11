@@ -134,7 +134,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 SearchPoi(poi);
 
-                routingInfo.setText("Distance: " + distBetween(originLatLng.latitude, originLatLng.longitude, poiLatLng.latitude, poiLatLng.longitude) + " km");
+                float routeDistance = distBetween(originLatLng.latitude, originLatLng.longitude, poiLatLng.latitude, poiLatLng.longitude);
+                int routeDuration = (Math.round((routeDistance/80) * 60));
+
+                routingInfo.setText("Distance: " + routeDistance + " km,      Duration: " + routeDuration + " min");
             }
         });
     }
