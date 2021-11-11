@@ -1,13 +1,9 @@
 package com.sleeplessstudios.mappapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,14 +11,26 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import com.karumi.dexter.Dexter;
@@ -32,9 +40,13 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback, NavigationView.OnNavigationItemSelectedListener  {
 
     private GoogleMap mMap;
+    private FusedLocationProviderClient userLocation;
+    private LatLng originLocation;
+    private Polyline currentPolyline;
+
     private ImageButton burgerBar;
     private DrawerLayout drawer;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -52,14 +64,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        // Obtain the MapFragment and get notified when the map is ready to be used.
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         checkMyPermission();
 
         if (isPermissionGranted) {
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
+
+            userLocation = LocationServices.getFusedLocationProviderClient(this);
+
+            getCurrentLocation();
         }
 
         drawer = findViewById(R.id.sidebar_main);
@@ -88,34 +103,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
 
-        LatLng capeTown = new LatLng(-33.9249, 18.4241);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(capeTown, 15f));
 
         mMap.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
             public void onPoiClick(PointOfInterest poi) {
                 String poiId = poi.placeId;
                 String poiName = poi.name;
+
                 LatLng poiLatLng = poi.latLng;
+
+                LatLng originLatLng = originLocation;
 
                 placeName.setText(poiName);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+
+                new FetchURL(MapsActivity.this).execute(getUrl(originLatLng, poiLatLng, "driving"), "driving");
+            }
+        });
+    }
+
+    private String getUrl(LatLng origin, LatLng destination, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + destination.latitude + "," + destination.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+
+        return url;
+    }
+
+    @Override
+    public void onTaskDone(Object... values) {
+        Toast.makeText(MapsActivity.this, "TASK COMPLETE", Toast.LENGTH_SHORT).show();
+        if (currentPolyline != null) {
+            currentPolyline.remove();
+        }
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+
+    }
+
+    private void getCurrentLocation() {
+        @SuppressLint("MissingPermission") Task<Location> task = userLocation.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    LatLng userPos = new LatLng(location.getLatitude(), location.getLongitude());
+
+
+                    MarkerOptions options = new MarkerOptions().position(userPos).title("You are here.");
+
+                    originLocation = options.getPosition();
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userPos, 15f));
+                    mMap.addMarker(options);
+                }
             }
         });
     }
