@@ -103,8 +103,8 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     public void openReviews()
     {
         drawer.closeDrawer(Gravity.LEFT);
-        //Intent intent = new Intent(this, Reviews.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Reviews.class);
+        startActivity(intent);
     }
 
     public void openSettings()
