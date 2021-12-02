@@ -63,6 +63,16 @@
                 android:text="Landmark Type"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/bottom_website_txt"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="website URL"
+                android:textAlignment="center"
+                android:textColor="@color/dark_blue" />
             <TextView
                 android:id="@+id/bottom_routing_txt"
                 style="@style/TextAppearance.AppCompat.Medium"
