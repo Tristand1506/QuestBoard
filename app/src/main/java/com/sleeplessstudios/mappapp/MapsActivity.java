@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -204,9 +205,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             if (place.getWebsiteUri() != null)
             {
+                websiteURL.setVisibility(View.VISIBLE);
                 websiteURL.setText(place.getWebsiteUri().toString());
             }
-            else websiteURL.setText("no website provided");
+            else websiteURL.setVisibility(View.GONE);
         });
     }
 
