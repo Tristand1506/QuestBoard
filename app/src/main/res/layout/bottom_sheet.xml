@@ -70,9 +70,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="website URL"
+                android:ellipsize="end"
+                android:lines="1"
+                android:autoLink="web"
+                android:text="website link"
                 android:textAlignment="center"
-                android:textColor="@color/dark_blue" />
+                android:textColor="@color/dark_blue"
+                android:textColorLink="@color/dark_blue" />
             <TextView
                 android:id="@+id/bottom_routing_txt"
                 style="@style/TextAppearance.AppCompat.Medium"

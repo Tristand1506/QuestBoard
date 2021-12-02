@@ -44,6 +44,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -172,7 +173,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void SearchPoi(PointOfInterest poi) {
 
-        final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.TYPES);
+        final List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.TYPES, Place.Field.WEBSITE_URI);
 
         final FetchPlaceRequest req = FetchPlaceRequest.newInstance(poi.placeId, placeFields);
         PlacesClient placesClient = Places.createClient(this);
@@ -186,12 +187,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             } else placeName.setText("Unnamed");
+
             if (place.getAddress() != null)
             {
                 address.setText(place.getAddress());
             }
             else address.setText("");
-
 
             if (place.getTypes().size() >= 1)
             {
@@ -200,6 +201,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 placeType.setText(tag);
             }
             else placeType.setText("");
+
+            if (place.getWebsiteUri() != null)
+            {
+                websiteURL.setText(place.getWebsiteUri().toString());
+            }
+            else websiteURL.setText("no website provided");
         });
     }
 
