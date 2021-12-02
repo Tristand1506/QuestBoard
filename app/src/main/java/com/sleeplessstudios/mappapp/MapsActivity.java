@@ -64,8 +64,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView address;
     private TextView placeType;
     private TextView routingInfo;
+    private TextView websiteURL;
 
+    private LatLng userPos;
     boolean isPermissionGranted;
+
+    private Settings settingsClass = new Settings();
 
 
     @Override
@@ -100,6 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         address = findViewById(R.id.bottom_address_txt);
         placeType = findViewById(R.id.bottom_type_txt);
         routingInfo = findViewById(R.id.bottom_routing_txt);
+        websiteURL = findViewById(R.id.bottom_website_txt);
 
         //PLACES PULL UP TAB
         LinearLayout linearLayout = findViewById(R.id.design_bottom_sheet);
@@ -118,6 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+
 
 
         mMap.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
@@ -248,7 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
-                    LatLng userPos = new LatLng(location.getLatitude(), location.getLongitude());
+                    userPos = new LatLng(location.getLatitude(), location.getLongitude());
 
 
                     MarkerOptions options = new MarkerOptions().position(userPos).title("You are here.");

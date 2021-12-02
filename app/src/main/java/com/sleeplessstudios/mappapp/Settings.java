@@ -11,15 +11,15 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ObjectLib.Location;
 import ObjectLib.UserAccount;
@@ -34,6 +34,8 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     private RadioButton miles;
 
     private DrawerLayout drawer;
+
+    public List<String> landmarkTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
 
         //spinner for FILTERING LANDMARKS
         spinner = findViewById(R.id.settings_spinner);
-        List<String> landmarkTypes = new ArrayList<>();
+        landmarkTypes = new ArrayList<>();
         landmarkTypes.add(0, "All Landmarks");
         landmarkTypes.add("Restaurants");
         landmarkTypes.add("Hotels");
