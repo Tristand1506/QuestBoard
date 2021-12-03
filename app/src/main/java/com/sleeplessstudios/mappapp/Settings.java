@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -32,6 +33,7 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     private Spinner spinner;
     private RadioButton km;
     private RadioButton miles;
+    private TextView sidebarUsername;
 
     private DrawerLayout drawer;
 
@@ -48,6 +50,8 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView navView = findViewById(R.id.sidebar_view);
         navView.setNavigationItemSelectedListener(this);
 
+
+
         //button listener
         burgerBar = findViewById(R.id.settings_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
@@ -57,6 +61,8 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
 
         miles = findViewById(R.id.settings_miles_btn);
         miles.setOnClickListener(v -> toggleMiles());
+
+
 
         if (AccountManager.getActiveAccountData().getPrefUnits()!=null) {
             switch (AccountManager.getActiveAccountData().getPrefUnits()) {
@@ -130,6 +136,9 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     public void openNavBar()
     {
         drawer.openDrawer(Gravity.LEFT);
+        sidebarUsername = findViewById(R.id.sidebar_username_txt);
+        sidebarUsername.setText(AccountManager.getActiveAccountData().getUsername());
+
     }
 
     public void openMain()

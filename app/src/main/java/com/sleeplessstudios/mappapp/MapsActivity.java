@@ -76,6 +76,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Settings settingsClass = new Settings();
 
+    private TextView sidebarUsername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -332,6 +334,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void openNavBar()
     {
         drawer.openDrawer(Gravity.LEFT);
+        sidebarUsername = findViewById(R.id.sidebar_username_txt);
+        sidebarUsername.setText(AccountManager.getActiveAccountData().getUsername());
     }
 
     public void openMain()

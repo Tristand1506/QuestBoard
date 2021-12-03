@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -18,6 +19,7 @@ import UtilLib.AccountManager;
 public class Favourites extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private ImageButton burgerBar;
     private DrawerLayout drawer;
+    private TextView sidebarUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
         burgerBar = (ImageButton) findViewById(R.id.reviews_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
+
     }
 
     @Override
@@ -59,6 +62,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     public void openNavBar()
     {
         drawer.openDrawer(Gravity.LEFT);
+        sidebarUsername = findViewById(R.id.sidebar_username_txt);
+        sidebarUsername.setText(AccountManager.getActiveAccountData().getUsername());
     }
 
     public void openMain()
