@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
             android:padding="16dp">
 
             <View
@@ -44,6 +45,18 @@
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="26dp"
                 android:textStyle="bold" />
+
+
+            <CheckBox
+                android:id="@+id/bottom_fav_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/beige"
+                android:button="@drawable/cb_selector"
+                android:checked="false"
+                app:srcCompat="@drawable/dark_fav_icon" />
 
             <TextView
                 android:id="@+id/bottom_address_txt"

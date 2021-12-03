@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -62,6 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DrawerLayout drawer;
     private BottomSheetBehavior bottomSheetBehavior;
 
+    private CheckBox fav_check;
+
     private TextView placeName;
     private TextView address;
     private TextView placeType;
@@ -100,6 +103,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //button listener
         burgerBar = findViewById(R.id.map_burger_btn);
         burgerBar.setOnClickListener(v -> openNavBar());
+        fav_check  = findViewById(R.id.bottom_fav_btn);
+        //change opennavbar to whatever method it needs to be
+        //fav_check.setOnClickListener(v -> openNavBar());
 
         //landmark info textviews
         placeName = findViewById(R.id.bottom_placename_txt);
