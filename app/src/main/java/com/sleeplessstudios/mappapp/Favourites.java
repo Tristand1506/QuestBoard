@@ -46,9 +46,6 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
             case R.id.sidebar_fav:
                 openFavs();
                 break;
-            case R.id.sidebar_reviews:
-                openReviews();
-                break;
             case R.id.sidebar_settings:
                 openSettings();
                 break;
@@ -77,13 +74,6 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
     {
         drawer.closeDrawer(Gravity.LEFT);
         Intent intent = new Intent(this, Favourites.class);
-        startActivity(intent);
-    }
-
-    public void openReviews()
-    {
-        drawer.closeDrawer(Gravity.LEFT);
-        Intent intent = new Intent(this, Reviews.class);
         startActivity(intent);
     }
 

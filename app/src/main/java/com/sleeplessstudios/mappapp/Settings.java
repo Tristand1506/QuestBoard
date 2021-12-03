@@ -120,9 +120,6 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.sidebar_fav:
                 openFavs();
                 break;
-            case R.id.sidebar_reviews:
-                openReviews();
-                break;
             case R.id.sidebar_settings:
                 openSettings();
                 break;
@@ -153,13 +150,6 @@ public class Settings extends AppCompatActivity implements NavigationView.OnNavi
     {
         drawer.closeDrawer(Gravity.LEFT);
         Intent intent = new Intent(this, Favourites.class);
-        startActivity(intent);
-    }
-
-    public void openReviews()
-    {
-        drawer.closeDrawer(Gravity.LEFT);
-        Intent intent = new Intent(this, Reviews.class);
         startActivity(intent);
     }
 
