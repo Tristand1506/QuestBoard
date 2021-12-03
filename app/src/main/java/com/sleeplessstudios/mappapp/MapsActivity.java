@@ -152,6 +152,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 LatLng poiLatLng = poi.latLng;
 
+                if (originLocation == null){
+                    getCurrentLocation();
+                }
                 LatLng originLatLng = originLocation;
 
                 placeName.setText(poiName);

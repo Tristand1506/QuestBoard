@@ -29,6 +29,8 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
+        initRecyclerView();
+
         drawer = findViewById(R.id.sidebar_main);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
         drawer.addDrawerListener(toggle);

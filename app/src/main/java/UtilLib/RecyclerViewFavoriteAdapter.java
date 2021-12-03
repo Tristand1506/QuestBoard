@@ -15,11 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sleeplessstudios.mappapp.R;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerViewFavoriteAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewFavoriteAdapter";
     private Context mContext;
+    private Boolean isFav;
+    private List<String> currentUserFavourites = new ArrayList<>();
 
     public RecyclerViewFavoriteAdapter(Context mContext) {
 
@@ -45,8 +49,14 @@ public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerVi
         holder.favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked) {
+
+                if (isChecked){
+                    AccountManager.getActiveAccountData().getFavorites().add(load);
+                    AccountManager.UpdateAccountData(AccountManager.getActiveAccountData());
+                }
+                else if (!isChecked){
                     AccountManager.getActiveAccountData().getFavorites().remove(load);
+                    AccountManager.UpdateAccountData(AccountManager.getActiveAccountData());
                 }
             }
         });
