@@ -24,7 +24,7 @@
             android:layout_marginTop="35dp"
             android:layout_marginEnd="0dp"
             android:background="#00FFFFFF"
-            android:button="@drawable/dark_fav_icon"
+            android:button="@drawable/cb_selector"
 
             android:checked="true"
             android:scaleX="1.25"
