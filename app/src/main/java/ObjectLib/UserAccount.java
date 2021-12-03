@@ -16,7 +16,7 @@ public class UserAccount {
     private String username;
 
     private UnitType prefUnits;
-    private List<Location> favorites;
+    private List<String> favorites;
     private LocationType prefLandmark;
 
 
@@ -40,7 +40,7 @@ public class UserAccount {
     }
 
     //full constructor
-    public UserAccount(String username, String email, UnitType unit, LocationType pref, List<Location> favs) {
+    public UserAccount(String username, String email, UnitType unit, LocationType pref, List<String> favs) {
         setEmail(email);
         setUsername(username);
 
@@ -81,11 +81,11 @@ public class UserAccount {
         this.prefUnits = prefUnits;
     }
 
-    public List<Location> getFavorites() {
+    public List<String> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(List<Location> favorites) {
+    public void setFavorites(List<String> favorites) {
         this.favorites = favorites;
     }
 
