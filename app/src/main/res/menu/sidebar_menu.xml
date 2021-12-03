@@ -15,10 +15,6 @@
             android:icon="@drawable/fav_icon"
             android:title="Favourites" />
 
-        <item
-            android:id="@+id/sidebar_reviews"
-            android:icon="@drawable/reviews_icon"
-            android:title="Reviews" />
     </group>
     <group>
         <item
