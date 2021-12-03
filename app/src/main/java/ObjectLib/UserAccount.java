@@ -1,5 +1,6 @@
 package ObjectLib;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import UtilLib.LocationType;
@@ -16,7 +17,7 @@ public class UserAccount {
     private String username;
 
     private UnitType prefUnits;
-    private List<String> favorites;
+    private List<String> favorites = new ArrayList<>();
     private LocationType prefLandmark;
 
 
@@ -98,9 +99,11 @@ public class UserAccount {
     }
 
     public Boolean isFavorite(String in){
-        for (int i = 0; i < favorites.size(); i++){
-            if (favorites.get(i).equals(in)){
-                return true;
+        if (favorites != null) {
+            for (int i = 0; i < favorites.size(); i++){
+                if (favorites.get(i).equals(in)){
+                    return true;
+                }
             }
         }
         return  false;

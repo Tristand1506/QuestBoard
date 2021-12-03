@@ -47,7 +47,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,6 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private BottomSheetBehavior bottomSheetBehavior;
 
     private CheckBox fav_check;
+    private Boolean isFav;
 
     private TextView placeName;
     private TextView address;
@@ -76,9 +77,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng userPos;
     boolean isPermissionGranted;
 
-    private Settings settingsClass = new Settings();
 
     private TextView sidebarUsername;
+
+    private List<String> currentUserFavourites = new ArrayList<>();
 
 
     @Override
@@ -113,21 +115,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //landmark info textviews
         fav_check = findViewById(R.id.bottom_fav_btn);
-        fav_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    UserAccount accIn = AccountManager.getActiveAccountData();
-                    accIn.getFavorites().add(placeName.getText().toString());
-                    AccountManager.UpdateAccountData(accIn);
-                }
-                else if (!isChecked){
-                    UserAccount accIn = AccountManager.getActiveAccountData();
-                    accIn.getFavorites().remove(placeName.getText().toString());
-                    AccountManager.UpdateAccountData(accIn);
-                }
-            }
-        });
+
         placeName = findViewById(R.id.bottom_placename_txt);
         address = findViewById(R.id.bottom_address_txt);
         placeType = findViewById(R.id.bottom_type_txt);
@@ -152,9 +140,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        UserAccount accIn = AccountManager.getActiveAccountData();
+
+
         mMap.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
             public void onPoiClick(PointOfInterest poi) {
+
                 String poiId = poi.placeId;
                 String poiName = poi.name;
 
@@ -193,7 +185,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         break;
                 }
 
-                fav_check.setChecked(AccountManager.getActiveAccountData().isFavorite(placeName.getText().toString()));
+                currentUserFavourites = accIn.getFavorites();
+                isFav = AccountManager.getActiveAccountData().isFavorite(poiName);
+                fav_check.setChecked(isFav);
+
+                fav_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                        if (isChecked && !isFav){
+                            currentUserFavourites.add(poiName);
+                            accIn.setFavorites(currentUserFavourites);
+                            AccountManager.UpdateAccountData(accIn);
+                        }
+                        else if (!isChecked && isFav){
+                            currentUserFavourites.remove(poiName);
+                            accIn.setFavorites(currentUserFavourites);
+                            AccountManager.UpdateAccountData(accIn);
+                        }
+                    }
+                });
 
             }
         });
