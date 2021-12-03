@@ -45,7 +45,9 @@ public class RecyclerViewFavoriteAdapter extends RecyclerView.Adapter<RecyclerVi
         holder.favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                AccountManager.getActiveAccountData().getFavorites().remove(load);
+                if (!isChecked) {
+                    AccountManager.getActiveAccountData().getFavorites().remove(load);
+                }
             }
         });
     }

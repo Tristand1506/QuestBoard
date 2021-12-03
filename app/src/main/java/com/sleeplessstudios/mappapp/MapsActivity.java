@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+import ObjectLib.UserAccount;
 import UtilLib.AccountManager;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback, NavigationView.OnNavigationItemSelectedListener  {
@@ -110,6 +112,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //fav_check.setOnClickListener(v -> openNavBar());
 
         //landmark info textviews
+        fav_check = findViewById(R.id.bottom_fav_btn);
+        fav_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    UserAccount accIn = AccountManager.getActiveAccountData();
+                    accIn.getFavorites().add(placeName.getText().toString());
+                    AccountManager.UpdateAccountData(accIn);
+                }
+                else if (!isChecked){
+                    UserAccount accIn = AccountManager.getActiveAccountData();
+                    accIn.getFavorites().remove(placeName.getText().toString());
+                    AccountManager.UpdateAccountData(accIn);
+                }
+            }
+        });
         placeName = findViewById(R.id.bottom_placename_txt);
         address = findViewById(R.id.bottom_address_txt);
         placeType = findViewById(R.id.bottom_type_txt);
@@ -175,6 +193,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         break;
                 }
 
+                fav_check.setChecked(AccountManager.getActiveAccountData().isFavorite(placeName.getText().toString()));
 
             }
         });

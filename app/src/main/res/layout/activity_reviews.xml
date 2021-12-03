@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_reviews"
+            android:id="@+id/recycler_view_favorites"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="73dp"
@@ -44,7 +44,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@color/transparent"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view_reviews"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_view_favorites"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/reviews_redbar_img"
             app:srcCompat="@drawable/burger_bar" />

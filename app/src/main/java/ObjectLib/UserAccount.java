@@ -97,6 +97,15 @@ public class UserAccount {
         this.prefLandmark = prefLandmark;
     }
 
+    public Boolean isFavorite(String in){
+        for (int i = 0; i < favorites.size(); i++){
+            if (favorites.get(i).equals(in)){
+                return true;
+            }
+        }
+        return  false;
+    }
+
     @Override
     public String toString() {
         return "UserAcount{" +
