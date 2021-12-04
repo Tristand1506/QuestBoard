@@ -99,6 +99,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             getCurrentLocation();
         }
+        else {
+            checkMyPermission();
+            getCurrentLocation();
+        }
 
         drawer = findViewById(R.id.sidebar_main);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.sidebar_open, R.string.sidebar_close);
@@ -147,14 +151,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onPoiClick(PointOfInterest poi) {
 
+                if (originLocation == null || !isPermissionGranted){
+                    checkMyPermission();
+                    getCurrentLocation();
+                }
+
                 String poiId = poi.placeId;
                 String poiName = poi.name;
 
                 LatLng poiLatLng = poi.latLng;
 
-                if (originLocation == null){
-                    getCurrentLocation();
-                }
                 LatLng originLatLng = originLocation;
 
                 placeName.setText(poiName);
